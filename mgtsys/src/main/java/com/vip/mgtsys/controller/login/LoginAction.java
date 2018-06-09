@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.vip.mgtsys.constant.Constant;
 import com.vip.mgtsys.model.EmployerInfo;
 import com.vip.mgtsys.service.login.LoginService;
 
@@ -22,7 +23,7 @@ public class LoginAction {
 		return "login/login";
 	}
 	
-	@RequestMapping("/doLogin")
+	@RequestMapping("/login/doLogin")
 	@ResponseBody
 	public EmployerInfo doLogin(@RequestParam String userId,
 			@RequestParam String pwd, HttpSession session) {
@@ -30,7 +31,7 @@ public class LoginAction {
 		EmployerInfo employerInfo = loginService.getEmployerInfo(userId, pwd);
 		if(null != employerInfo &&
 				(null != employerInfo.getEmployerId() || "".equals(employerInfo.getEmployerId()))) {
-			session.setAttribute("employerInfo", employerInfo);
+			session.setAttribute(Constant.SESSION_EMPLOYER_INFO, employerInfo);
 		}
 		
 		// 用户信息取得

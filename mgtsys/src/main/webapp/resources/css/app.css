@@ -1927,7 +1927,12 @@ ul.tpl-dropdown-content .tpl-dropdown-menu-messages-item .menu-messages-content 
 .theme-black .protocal .protocal-span {
   padding-left: 25px;
 }
-.error-style{
+.error-style {
   color: #ff0000;
+  font-size: 14px;
+}
+.for-label-one {
+  width: 50%;
+  color: #B3B3B3;
   font-size: 14px;
 }

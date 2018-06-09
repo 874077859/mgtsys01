@@ -60,10 +60,14 @@
 var app = angular.module('myApp', []);
 app.controller('loginCtr', function($scope, $http){
 	$scope.doLogin = function() {
-		$http.post("<%=request.getContextPath()%>/doLogin?userId="+$scope.userId+"&pwd="+$scope.pwd)
+		$http.post("<%=request.getContextPath()%>/login/doLogin?userId="+$scope.userId+"&pwd="+$scope.pwd)
 				.then(function(response){
 					if(response.data.employerId != null) {
-						window.location = "<%=request.getContextPath()%>/employer/employee";
+						if(response.data.employerStatus == "01") {
+							window.location = "<%=request.getContextPath()%>/employer/employer";
+						} else {
+							window.location = "<%=request.getContextPath()%>/employee/addEmployee";
+						}
 					} else {
 						$scope.errorFlg = true;
 						$scope.error = "用户不存在或密码有误！";
@@ -71,7 +75,7 @@ app.controller('loginCtr', function($scope, $http){
 				});
     };
     $scope.goRegist = function() {
-    	window.location = "<%=request.getContextPath()%>/goRegist";
+    	window.location = "<%=request.getContextPath()%>/regist/goRegist";
     }
 });
 </script>

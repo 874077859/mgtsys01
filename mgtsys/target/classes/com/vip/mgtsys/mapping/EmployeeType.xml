@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vip.mgtsys.dao.EmployeeTypeDao">
+    <!-- 定义缓存  一般是一级缓存，如果用同一个sqlsession 那么相同查询直接会从缓存中查找 
+    <cache size="1024" flushInterval="60000" eviction="LRU" readOnly="false"></cache>
+    -->
+    <resultMap id="employeeType" type="com.vip.mgtsys.model.EmployeeType">
+        <id property="typeKey" column="employee_type"/>
+        <result property="typeValue" column="employee_type_name"/>
+    </resultMap>
+    
+    <!-- 查找所有 -->
+    <select id="getEmployeeType" resultMap="employeeType">
+        select
+            employee_type,
+            employee_type_name
+        from
+            tbl_sys_employee_type
+        where
+            sid = #{sid}
+    </select>
+    
+    <insert id="insertEmployer">
+        insert into tbl_sys_employer
+        (
+          sid,
+          employer_id,
+          employer_pwd,
+          employer_mail,
+          employer_status
+        )
+        values(
+          #{sid},
+          #{employerId},
+          #{employerPwd},
+          #{employerMail},
+          #{employerStatus}
+        )
+    </insert>
+    
+    <select id="getMaxSid" resultType="int">
+        select
+            count(1)
+        from
+            tbl_sys_employer
+        where
+            create_time >= #{sysDate}
+    </select>
+    
+    <update id="updateEmployer">
+        update tbl_sys_employer
+        set
+            employer_name = #{employerName},
+            employer_tel = #{employerTel},
+            employer_address = #{employerAddress},
+            employer_permission = #{employerPermission},
+            employer_status = #{employerStatus}
+        where
+            sid = #{sid}
+    </update>
+</mapper>
