@@ -23,16 +23,20 @@
 
 <body data-type="login" class="theme-black">
 <div ng-app="myApp" ng-controller="loginCtr">
-  <p ng-style="{color:'white'}">welcom {{userName}} !!!</p>
+  <ul>
+    <li ng-repeat="employee in employeeList">
+      <input type="radio" ng-model="employee.employeeId">{{employee.employeeName}}
+    </li>
+  </ul>
 </div>
 
 <script>
 var app = angular.module('myApp', []);
 app.controller('loginCtr', function($scope, $http){
-	$http.get("<%=request.getContextPath()%>/employer/getEmployeeInfo")
-	        .then(function(response){
-				$scope.userName = response.data.usrNm;
-			});
+	$http.get("<%=request.getContextPath()%>/employee/getEmployeeList")
+	    .then(function(response){
+		    $scope.employeeList = response.data;
+		});
 });
 </script>
 

@@ -15,20 +15,24 @@ public class EmployeeServiceImpl implements EmployeeService {
 	private EmployeeDao employeeDao;
 
 	@Override
-	public List<EmployeeInfo> getEmployeeInfo(String sid, String usrId, String pwd) {
-		return employeeDao.getEmployeeInfo(sid, usrId, pwd);
+	public List<EmployeeInfo> getEmployeeList(String sid, String employeeStatus) {
+		return employeeDao.getEmployeeList(sid, employeeStatus);
 	}
 
 	@Override
-	public int getMaxSid(String sysDate) {
-		return employeeDao.getMaxSid(sysDate);
+	public int count(String sid, String employeeStatus) {
+		return employeeDao.count(sid, employeeStatus);
 	}
 
 	@Override
 	public int insertEmployee(EmployeeInfo employeeInfo) {
-		return employeeDao.insertEmployee(employeeInfo.getSid(), employeeInfo.getEmployeeId(),
-				employeeInfo.getEmployeePwd(), employeeInfo.getEmployeeMail(), employeeInfo.getEmployeeStatus(),
-				employeeInfo.getEmployeeType());
+		return employeeDao.insertEmployee(employeeInfo.getSid(),
+				                          employeeInfo.getEmployeeId(),
+				                          employeeInfo.getEmployeePwd(),
+				                          employeeInfo.getEmployeeName(),
+				                          employeeInfo.getEmployeeTel(),
+				                          employeeInfo.getEmployeeStatus(),
+				                          employeeInfo.getEmployeeType());
 	}
 
 }

@@ -63,15 +63,11 @@ app.controller('loginCtr', function($scope, $http){
 		$http.post("<%=request.getContextPath()%>/login/doLogin?userId="+$scope.userId+"&pwd="+$scope.pwd)
 				.then(function(response){
 					if(response.data.employerId != null) {
-<<<<<<< HEAD
 						if(response.data.employerStatus == "01") {
 							window.location = "<%=request.getContextPath()%>/employer/employer";
 						} else {
-							window.location = "<%=request.getContextPath()%>/employee/addEmployee";
+							window.location = "<%=request.getContextPath()%>/employee/employee";
 						}
-=======
-						window.location = "<%=request.getContextPath()%>/employer/main";
->>>>>>> 3a68e7c6c88a87c2deef5a73d283d871230b7834
 					} else {
 						$scope.errorFlg = true;
 						$scope.error = "用户不存在或密码有误！";

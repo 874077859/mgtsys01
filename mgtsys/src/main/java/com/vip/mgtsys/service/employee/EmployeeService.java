@@ -5,9 +5,9 @@ import java.util.List;
 import com.vip.mgtsys.model.EmployeeInfo;
 
 public interface EmployeeService {
-	List<EmployeeInfo> getEmployeeInfo(String sid, String usrId, String pwd);
+	List<EmployeeInfo> getEmployeeList(String sid, String employeeStatus);
 
-	int getMaxSid(String sysDate);
+	int count(String sid, String employeeStatus);
 
 	int insertEmployee(EmployeeInfo employeeInfo);
 }

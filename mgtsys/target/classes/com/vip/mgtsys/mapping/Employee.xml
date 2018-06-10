@@ -7,25 +7,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <cache size="1024" flushInterval="60000" eviction="LRU" readOnly="false"></cache>
     -->
     <resultMap id="employeeInfo" type="com.vip.mgtsys.model.EmployeeInfo">
-        <id property="sid" column="sid"/>
         <id property="employeeId" column="employee_id"/>
         <result property="employeeName" column="employee_name"/>
     </resultMap>
     
     <!-- 查找所有 -->
-    <select id="getEmployeeInfo" resultMap="employeeInfo">
-        select employee_id, employee_name from tbl_sys_employee
-        <where>
-            <if test="usrId != null and usrId != '' ">
-                and employee_id = #{usrId}
-            </if>
-            <if test="pwd != null and pwd != '' ">
-                and employee_pwd = #{pwd}
-            </if>
-            <if test="sid != null and sid != '' ">
-                and sid = #{sid}
-            </if>
-        </where>
+    <select id="getEmployeeList" resultMap="employeeInfo">
+        select
+            employee_id,
+            employee_name
+        from tbl_sys_employee
+        where
+            sid = #{sid}
+        and employee_status <![CDATA[<>]]> #{employeeStatus}
+        and delete_flag = '0'
     </select>
     
     <insert id="insertEmployee">
@@ -34,7 +29,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
           sid,
           employee_id,
           employee_pwd,
-          employee_mail,
+          employee_name,
+          employee_tel,
           employee_status,
           employee_type
         )
@@ -42,18 +38,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
           #{sid},
           #{employeeId},
           #{employeePwd},
-          #{employeeMail},
+          #{employeeName},
+          #{employeeTel},
           #{employeeStatus},
           #{employeeType}
         )
     </insert>
     
-    <select id="getMaxSid" resultType="int">
+    <select id="count" resultType="int">
         select
             count(1)
         from
             tbl_sys_employee
         where
-            create_time >= #{sysDate}
+            sid = #{sid}
+        and employee_status <![CDATA[<>]]> #{employeeStatus}
+        and delete_flag = '0'
     </select>
 </mapper>

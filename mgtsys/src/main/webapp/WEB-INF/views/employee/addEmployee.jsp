@@ -94,15 +94,15 @@ app.controller('addEmployeeCtr', function($scope, $http){
 		window.location = "<%=request.getContextPath()%>";
     };
     $scope.doCommit = function() {
-    	var data = {employeeID:$scope.employeeID,
+    	var data = {employeeId:$scope.employeeID,
                     employeeName:$scope.employeeName,
                     employeeTel:$scope.employeeTel,
-                    employeeType:$scope.employeeType,
-                    employeeStatus:$scope.employeeStatus,
+                    employeeType:$scope.employeeType.key,
+                    employeeStatus:$scope.employeeStatus.key,
                     employeePwd:$scope.employeePwd};
     	$http.post("<%=request.getContextPath()%>/employee/doAdd", data)
     	    .then(function(response){
-    		    window.location = "<%=request.getContextPath()%>/employee/main";
+    	        window.location = "<%=request.getContextPath()%>/employee/index";
     	    });
     };
 });
