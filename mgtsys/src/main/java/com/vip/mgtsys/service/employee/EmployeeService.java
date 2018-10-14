@@ -10,4 +10,14 @@ public interface EmployeeService {
 	int count(String sid, String employeeStatus);
 
 	int insertEmployee(EmployeeInfo employeeInfo);
+	/********刘峻铭编辑star *********/
+	int getEmployeeCnt(String sid, String employeeId);
+	
+	EmployeeInfo getEmployeeInfo(String sid, String employeeId, String employeePwd);
+	
+	int updateEmployee(EmployeeInfo employeeInfo);
+	/********刘峻铭编辑 end*********/
+
+	
 }
+

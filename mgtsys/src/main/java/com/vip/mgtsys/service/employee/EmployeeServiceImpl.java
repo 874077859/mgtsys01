@@ -34,5 +34,26 @@ public class EmployeeServiceImpl implements EmployeeService {
 				                          employeeInfo.getEmployeeStatus(),
 				                          employeeInfo.getEmployeeType());
 	}
-
+	/********刘峻铭编辑star *********/
+	@Override
+	public int getEmployeeCnt(String sid, String employeeId) {
+		// TODO 1-generated method stub
+		return employeeDao.selectEmployeeCnt(sid, employeeId);
+	}
+	
+	@Override
+	public EmployeeInfo getEmployeeInfo(String sid,String employeeId, String employeePwd) {
+		return employeeDao.getEmployeeInfo(sid, employeeId, employeePwd);
+	}
+	
+	@Override
+	public int updateEmployee(EmployeeInfo employeeInfo) {
+		return employeeDao.updateEmployee(employeeInfo.getSid(),
+                                          employeeInfo.getEmployeeId(),
+                                          employeeInfo.getEmployeeName(),
+                                          employeeInfo.getEmployeeTel(),
+                                          employeeInfo.getEmployeeStatus(),
+                                          employeeInfo.getEmployeeType());
+	}
+	/********刘峻铭编辑 end*********/
 }

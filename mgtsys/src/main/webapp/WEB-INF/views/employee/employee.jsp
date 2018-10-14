@@ -23,20 +23,39 @@
 
 <body data-type="login" class="theme-black">
 <div ng-app="myApp" ng-controller="loginCtr">
+  <div ng-init="init()"></div>
   <ul>
     <li ng-repeat="employee in employeeList">
-      <input type="radio" ng-model="employee.employeeId">{{employee.employeeName}}
+      <input type="radio" ng-model="$parent.employeeId"
+       value="{{employee.employeeId}}"/>{{employee.employeeName}}
     </li>
   </ul>
+  <!-- *******刘峻铭编辑star ********-->
+  <div class="am-form-group">
+    <button type="button" ng-click="doLogin()">确定</button>
+  </div>
+<!-- *******刘峻铭编辑 end********-->
 </div>
 
 <script>
 var app = angular.module('myApp', []);
 app.controller('loginCtr', function($scope, $http){
-	$http.get("<%=request.getContextPath()%>/employee/getEmployeeList")
-	    .then(function(response){
-		    $scope.employeeList = response.data;
-		});
+	$scope.init = function() {
+	    $http.get("<%=request.getContextPath()%>/employee/getEmployeeList")
+	        .then(function(response){
+		        $scope.employeeList = response.data;
+		        $scope.employeeId = response.data[0].employeeId;
+		    });
+	};
+/********刘峻铭编辑star *********/
+    $scope.doLogin = function() {
+    	$http.post("<%=request.getContextPath()%>/employee/goEmployeeLogin?employeeId="+$scope.employeeId)
+    	     .then(function(response){
+		    window.location = "<%=request.getContextPath()%>/employee/employeeLogin";
+	    });
+    };
+    
+/********刘峻铭编辑 end*********/
 });
 </script>
 
